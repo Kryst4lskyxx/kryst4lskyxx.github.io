@@ -2,8 +2,10 @@ import Link from 'next/link';
 import { getAllPostIds, getPostData } from '@/lib/posts';
 
 export async function generateStaticParams() {
-    const paths = getAllPostIds();
-    return paths;
+    const posts = getAllPostIds();
+    return posts.map((post) => ({
+        id: post.params.id,
+    }));
 }
 
 export default async function Post({ params }: { params: { id: string } }) {

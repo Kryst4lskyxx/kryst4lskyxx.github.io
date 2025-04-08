@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { getAllPostIds, getPostData } from '@/lib/posts';
 
-export async function generateStaticParams() {
+// 确保返回的格式符合Next.js 15的要求
+export async function generateStaticParams(): Promise<{ id: string }[]> {
     const posts = getAllPostIds();
-    return posts.map((post) => ({
-        id: post.params.id,
-    }));
+    // 简化返回结构，直接返回id数组
+    return posts.map(post => ({ id: post.params.id }));
 }
 
 export default async function Post({ params }: { params: { id: string } }) {
